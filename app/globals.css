@@ -3,19 +3,28 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #8FA9A3;
+  --secondary: #F28AA8;
+  --tertiary: #F6F2EA;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #36524d;
     --foreground: #ededed;
+    --primary: #b0d4ce;
+    --secondary: #D96C91;
+    --tertiary: #E5DED4;
   }
 }
 
@@ -24,3 +33,36 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.stroke-draw {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: draw 2s ease forwards;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: .7; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(1); opacity: .7; }
+}
+
+.pulse { animation: pulse 2.4s ease-in-out infinite; transform-origin: center; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.trace-path { animation: fadeIn .8s ease forwards; will-change: opacity, transform; }
+.anim-paused * { animation-play-state: paused !important; }
+
+@keyframes hue {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  100% { filter: hue-rotate(20deg) saturate(1.1); }
+}
+
+.trace-hue { animation: hue 8s ease-in-out infinite alternate; will-change: filter; }
