@@ -1,21 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bodoni_Moda, Lora } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const headingFont = Bodoni_Moda({
+  variable: "--font-heading",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bodyFont = Lora({
+  variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Trae AI — Site de Marca",
-  description: "Site demonstrativo de marca com GSAP, responsivo e performático",
-  keywords: ["Trae AI", "GSAP", "Landing", "Next.js", "Tailwind"],
+  title: "encantostoreju",
+  description:
+    "Site demonstrativo de marca com GSAP, responsivo e performático",
+  keywords: ["encantostoreju", "GSAP", "Landing", "Next.js", "Tailwind"],
+  icons: {
+    icon: "/assets/icon.ico",
+    shortcut: "/assets/icon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -25,9 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        <link rel="icon" href="/assets/icon.ico" />
+        <link rel="shortcut icon" href="/assets/icon.ico" />
+      </head>
+      <body className={`${bodyFont.className} ${headingFont.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -3,9 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #8FA9A3;
-  --secondary: #F28AA8;
-  --tertiary: #F6F2EA;
+  --primary: #91aeb0;
+  --secondary: #f28aa8;
+  --tertiary: #f6f2ea;
 }
 
 @theme inline {
@@ -14,28 +14,64 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-heading: var(--font-heading);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #36524d;
     --foreground: #ededed;
-    --primary: #b0d4ce;
-    --secondary: #D96C91;
-    --tertiary: #E5DED4;
+    --primary: #91aeb0;
+    --secondary: #d96c91;
+    --tertiary: #e5ded4;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.font-body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.font-heading {
+  font-family: var(--font-heading), ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+}
+
+.type-title {
+  font-family: var(--font-heading), ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.type-subtitle {
+  font-family: var(--font-heading), ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+
+.type-body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  letter-spacing: 0;
+  line-height: 1.6;
 }
 
 @keyframes draw {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .stroke-draw {
@@ -45,24 +81,105 @@ body {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: .7; }
-  50% { transform: scale(1.5); opacity: 1; }
-  100% { transform: scale(1); opacity: .7; }
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
 }
 
-.pulse { animation: pulse 2.4s ease-in-out infinite; transform-origin: center; }
+.pulse {
+  animation: pulse 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
 
 @keyframes fadeIn {
-  0% { opacity: 0; transform: scale(.98); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.trace-path { animation: fadeIn .8s ease forwards; will-change: opacity, transform; }
-.anim-paused * { animation-play-state: paused !important; }
+.trace-path {
+  animation: fadeIn 0.8s ease forwards;
+  will-change: opacity, transform;
+}
+.anim-paused * {
+  animation-play-state: paused !important;
+}
 
 @keyframes hue {
-  0% { filter: hue-rotate(0deg) saturate(1); }
-  100% { filter: hue-rotate(20deg) saturate(1.1); }
+  0% {
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  100% {
+    filter: hue-rotate(20deg) saturate(1.1);
+  }
 }
 
-.trace-hue { animation: hue 8s ease-in-out infinite alternate; will-change: filter; }
+.trace-hue {
+  animation: hue 8s ease-in-out infinite alternate;
+  will-change: filter;
+}
+img {
+  -webkit-user-drag: none;
+}
+
+/* Social buttons animation */
+.social-btn {
+  color: var(--color-primary);
+  transition: transform 300ms ease, color 300ms ease, opacity 300ms ease, filter 300ms ease;
+  will-change: transform, color, opacity, filter;
+  transform: translateZ(0);
+}
+.social-btn:hover,
+.social-btn:focus-visible {
+  transform: translateY(-2px) scale(1.06);
+  color: color-mix(in oklab, var(--color-primary) 90%, white);
+  outline: none;
+}
+.social-btn:active {
+  transform: translateY(0) scale(0.94);
+}
+.social-btn svg {
+  display: block;
+  transition: transform 300ms ease, filter 300ms ease;
+  will-change: transform, filter;
+  animation: float 5s ease-in-out infinite alternate;
+}
+.social-btn:hover svg,
+.social-btn:focus-visible svg {
+  filter: brightness(1.08);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-btn svg {
+    animation: none;
+  }
+  .social-btn {
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+}

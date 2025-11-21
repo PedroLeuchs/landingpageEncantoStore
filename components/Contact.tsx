@@ -14,25 +14,44 @@ export default function Contact() {
     const clean = p.replace(/^\/?assets[\/]/, "").replace(/\\/g, "/");
     return "/assets/" + clean;
   };
-  const images: string[] = Array.isArray(contactImages) ? contactImages.map(resolvePath) : [];
+  const images: string[] = Array.isArray(contactImages)
+    ? contactImages.map(resolvePath)
+    : [];
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const debug = typeof window !== "undefined" && window.location.hostname === "localhost";
+      const debug =
+        typeof window !== "undefined" &&
+        window.location.hostname === "localhost";
       gsap.set([".ig-card", ".ig-post"], { willChange: "transform, opacity" });
-      gsap.set(".ig-card", {  x: 0, y: 0, transformOrigin: "left top", width: "350px", height: "350px" });
+      gsap.set(".ig-card", {
+        x: 0,
+        y: 0,
+        transformOrigin: "left top",
+        width: "350px",
+        height: "350px",
+      });
 
       const slider = document.querySelector<HTMLElement>(".ig-slider");
       const track = document.querySelector<HTMLElement>(".ig-track");
       const slides = gsap.utils.toArray<HTMLElement>(".ig-slide");
       const countEl = document.querySelector<HTMLElement>(".ig-count");
-      const total = (images.length || slides.length) || 1;
+      const total = images.length || slides.length || 1;
       if (countEl) countEl.textContent = `1 / ${total}`;
 
       const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
-      tl
-        .to(".ig-card", {  x: "100%" , y: "-30%", duration: 0.6, width: "450px", height: "800px" })
-        .fromTo(".ig-post", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5 }, "<");
+      tl.to(".ig-card", {
+        x: "100%",
+        y: "-30%",
+        duration: 0.6,
+        width: "450px",
+        height: "800px",
+      }).fromTo(
+        ".ig-post",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "<"
+      );
 
       let slideTween: gsap.core.Tween | null = null;
       if (slider && track) {
@@ -74,7 +93,11 @@ export default function Contact() {
         tl.invalidate();
       });
 
-      window.addEventListener("resize", () => gsap.delayedCall(0.05, () => ScrollTrigger.refresh()), { passive: true });
+      window.addEventListener(
+        "resize",
+        () => gsap.delayedCall(0.05, () => ScrollTrigger.refresh()),
+        { passive: true }
+      );
     }, ref);
     return () => ctx.revert();
   }, []);
@@ -89,28 +112,54 @@ export default function Contact() {
               "linear-gradient(135deg, #f58529 0%, #feda75 25%, #dd2a7b 50%, #8134af 75%, #515bd4 100%)",
           }}
         >
-          <div className="ig-count absolute top-24 right-10 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-xs z-9">1 / {images.length || 1}</div>
-          <div className="flex items-center justify-between gap-3" aria-label="Divulgação do Instagram">
-            <div className="text-xl md:text-2xl font-bold bg-black/50 rounded-full px-3 py-1">@encantostoreju</div>
-            <a 
+          <div className="ig-count absolute top-24 right-10 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-xs z-9">
+            1 / {images.length || 1}
+          </div>
+          <div
+            className="flex items-center justify-between gap-3"
+            aria-label="Divulgação do Instagram"
+          >
+            <div className="text-xl md:text-2xl font-bold bg-black/50 rounded-full px-3 py-1">
+              @encantostoreju
+            </div>
+            <a
               href="https://www.instagram.com/encantostoreju?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               rel="noopener noreferrer"
             >
-
-            <svg viewBox="0 0 24 24" className="h-8 w-8" role="img" aria-label="Logo do Instagram">
-              <title>Instagram</title>
-              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.8-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z" fill="currentColor" />
-            </svg>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-8 w-8"
+                role="img"
+                aria-label="Logo do Instagram"
+              >
+                <title>Instagram</title>
+                <path
+                  d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.8-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
           </div>
           {/* <p className="mt-3 opacity-90">Siga-nos no Instagram</p> */}
           <div className="ig-post overflow-hidden rounded-2xl bg-white/10 p-2 h-full w-full">
             <div className="ig-slider overflow-hidden h-full w-full">
-              <div className="ig-track flex h-full" style={{ width: `${(images.length || 1) * 100}%` }}>
+              <div
+                className="ig-track flex h-full"
+                style={{ width: `${(images.length || 1) * 100}%` }}
+              >
                 {images.map((src, idx) => (
-                  <div key={idx} className="ig-slide h-full shrink-0" style={{ width: `${100 / (images.length || 1)}%` }}>
-                    <img className="h-full w-full object-cover rounded-xl" src={src} alt={`Publicação ${idx + 1} do Instagram`} loading="lazy" />
+                  <div
+                    key={idx}
+                    className="ig-slide h-full shrink-0"
+                    style={{ width: `${100 / (images.length || 1)}%` }}
+                  >
+                    <img
+                      className="h-full w-full object-cover rounded-xl select-none"
+                      src={src}
+                      alt={`Publicação ${idx + 1} do Instagram`}
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
