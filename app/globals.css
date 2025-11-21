@@ -183,3 +183,48 @@ img {
     transition: transform 200ms ease, opacity 200ms ease;
   }
 }
+
+.float-shadow {
+  display: inline-block;
+  position: relative;
+  transition: transform 300ms ease;
+  will-change: transform;
+}
+.float-shadow::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 80%);
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.float-shadow:hover,
+.float-shadow:focus-visible {
+  transform: translateY(-5px);
+}
+.float-shadow:hover::before,
+.float-shadow:focus-visible::before {
+  opacity: 1;
+  transform: translateY(5px);
+}
+.float-shadow:active {
+  transform: translateY(0) scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-shadow {
+    transition: transform 200ms ease;
+  }
+  .float-shadow:hover,
+  .float-shadow:focus-visible {
+    transform: translateY(-3px);
+  }
+  .float-shadow::before {
+    transition: opacity 200ms ease;
+  }
+}

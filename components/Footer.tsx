@@ -38,7 +38,7 @@ export default function Footer() {
               <a
                 href="https://wa.me/5599999999999?text=Ol%C3%A1%20encantostoreju"
                 aria-label="WhatsApp"
-                className="social-btn hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+                className="social-btn float-shadow hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -56,7 +56,7 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="social-btn hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+                className="social-btn float-shadow hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -74,7 +74,7 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Facebook"
-                className="social-btn hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+                className="social-btn float-shadow hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
                 target="_blank"
                 rel="noopener noreferrer"
               >
